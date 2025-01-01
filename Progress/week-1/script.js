@@ -55,3 +55,60 @@
 
 
 
+// const obj = {
+//     'name': 'John',
+//     'age': 30,
+//     'city': 'New York'
+// }
+
+// // it is an object
+// console.log(obj)
+// console.log(typeof(obj))
+
+// // string representation of the object
+// console.log(JSON.stringify(obj))
+// console.log(typeof(JSON.stringify(obj)))
+
+
+
+// const obj = {
+//     'name': 'John',
+//     'age': 30,
+//     'city': 'New York'
+// }
+
+// const { name: n, age: a, city: c} = obj;
+
+// console.log(n, a, c)
+
+
+
+
+// // 
+// const nums = [1,2,4, 5, 6, 7, 8, 9, 10];
+
+// const sum = nums.reduce((a, b) => a+b);
+
+// console.log(sum)
+
+
+
+// let example = "s"; 
+
+// console.log(example.padEnd(10, 1));
+// console.log(example.padStart(101).length);
+
+// function is_it() {
+//     console.log("Hello World")
+// }
+
+// const Animal = require('./animal.js');
+
+// let dog = new Animal('dog');
+
+// dog.speak();
+// dog.nam();
+
+
+
+

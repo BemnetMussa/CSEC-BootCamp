@@ -9,7 +9,7 @@
 // let a = 'age';
 // console.log(person[a])
 
-const { json } = require("stream/consumers");
+// const { json } = require("stream/consumers");
 
 
 
@@ -265,6 +265,30 @@ const { json } = require("stream/consumers");
 
 
 
+// let value = 24;
+
+
+// function inc(v) {
+//     v += 1
+// }
+
+// console.log(value)
+
+
+// // output : 24
+
+// let person = {
+//   name: 'John',
+//   age: 25,
+// };
+
+// function increaseAge(obj) {
+//   obj.age += 1;
+// }
+
+// increaseAge(person);
+
+// console.log(person);
 
 
 

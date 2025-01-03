@@ -9,6 +9,8 @@
 // let a = 'age';
 // console.log(person[a])
 
+// const { json } = require("stream/consumers");
+
 
 
 // const a = document.getElementById('val');
@@ -225,5 +227,69 @@
 
 // console.log(result); // 100 
 // console.log(y); // 10 -- no change
+
+// let dat = [
+//     {
+//         name: 'jhon'
+//     },
+//      {
+//         name: 'ben'
+//     }, {
+//         name: 'almaze'
+//     }, {
+//         name: 'burta '
+//     }, {
+//         name: 'choo'
+//     }
+// ]
+// dat().map((values) => {
+//     console.log(values.name)
+// })
+
+
+
+
+
+// function greeting() {
+//     let message = 'Hi';
+
+//     function sayHi() {
+//         console.log(message);
+//     }
+
+//     return sayHi;
+// }
+// let hi = greeting();
+// hi(); // still can access the message variable
+
+
+
+
+// let value = 24;
+
+
+// function inc(v) {
+//     v += 1
+// }
+
+// console.log(value)
+
+
+// // output : 24
+
+// let person = {
+//   name: 'John',
+//   age: 25,
+// };
+
+// function increaseAge(obj) {
+//   obj.age += 1;
+// }
+
+// increaseAge(person);
+
+// console.log(person);
+
+
 
 

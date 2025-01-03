@@ -60,32 +60,87 @@ p{
 
 
 
+.home {
+  background-image: url('./img/computer-mouse-paper-bag-blue-background-top-view.jpg');
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin: 0 auto;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  width: 100%;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.home h1, .home p {
+  z-index: 2; 
+}
+
+.home h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.home p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+
+
+
+
 .container {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   padding: 2em;
+  gap: 1.5em;
 }
 
 .card {
   position: relative;
-  width: 300px;
+  width: 280px;
   height: auto;
-
-  padding: 0 1em 1em 1em;
+  padding: 1.5em 1em;
   background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(175, 170, 170, 0.946);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin: 1em;
   z-index: 1;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .card-img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .card-img img {
@@ -99,34 +154,105 @@ p{
   justify-content: space-between;
   width: 100%;
   padding: 1em 0;
+  gap: 0.5em;
 }
 
 .card-content p {
   margin: 0;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
 }
 
-.card > * {
-  padding-top: 1em;
+.card-content .name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex: 1;
 }
 
-i {
+.card-content .price {
+  font-size: 1.1rem;
+  color: #008000;
+  text-align: right;
+}
+
+.card > i {
   position: absolute;
-  background-color: #10111147;
-  padding: 10px;
+  top: 10px;
+  right: 10px;
+  background-color: #3d404047;
+  padding: 8px;
   border-radius: 50%;
-  right: 0;
-  margin: 0.5em;
-  color: rgb(255, 255, 255);
+  color: #ffffff;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 2;
 }
 
-i:hover {
+.card > i:hover {
   cursor: pointer;
-  background-color:  #90c2ff;
+  background-color: #90c2ff;
   color: white;
 }
 
+.card > p {
+  margin-top: 1em;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+  text-align: justify;
+}
 
 
+
+.footer {
+  background-color: #4f9cfb; /* A deep blue for the background */
+  color: #ffffff; /* White text */
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: start;
+  margin: 0 15px;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #90c2ff; 
+}
+
+.footer-social a {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  color: #ffffff; 
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: black;
+  transform: scale(1.1);
+}
+
+.footer-copy p {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.9;
+}
 
 
 @media screen and (min-width: 500px) {
@@ -140,6 +266,16 @@ i:hover {
 @media screen and (min-width: 900px) {
   .container {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-container {
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-links a {
+    display: block;
+    margin: 5px 0;
   }
 }
 

@@ -5,11 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1 id="val">Hello dev</h1>
-    <img src="/CSEC-Bootcamp-frontend-basics/Ecommers/img/misty-forest-against-flying-bald-eagle-ckscoix0z52a9fdo.jpg" width="100px" alt="freedom">
-    <button>Change user</button>
+<body style="display: flex; flex-direction: column; align-items: center;">
+
+    <p style="border: 1px solid black; padding: 2em; width: 100px;">CSEC ASTU</p>
+
+
+    <div class="butns" style">
+        <button id="name" onclick="update('name')">Name</button>
+        <button id="age" onclick="update('age')">Age</button>
+        <button id="dept" onclick="update('dept')">Dept</button>
+    </div>
+
+
+
+    <div>
+        <ul>
+            <li>js</li>
+            <li>C#</li>
+        </ul>
+    </div>
+
 
 </body>
-<script src="./script.js"></script>
+<script>
+    
+    const message = document.querySelector('p')
+    
+    let data = {
+        'name': 'Bemnet',
+        'age': 21,
+        'dept': 'Sw'
+    }
+
+    console.log(document.querySelectorAll('button'))
+    
+    function update(val) {
+
+        message.innerText = data[val]
+    }
+
+
+    const lis = document.querySelector('ul')
+
+    let li = document.createElement('li')
+    li.innerHTML = 'C++'
+    lis.appendChild(li)
+
+
+</script>
 </html>

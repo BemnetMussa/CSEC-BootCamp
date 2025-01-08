@@ -84,3 +84,69 @@
 // }
  
 // fn(Date);
+
+
+
+// let random: String = "TS";
+
+// console.log("Compiling the ts file");
+
+// if (random == ''){
+//     random = "js";
+// }
+
+// let d: number = 24;
+// let init = 24;
+// let level;
+
+
+// let user: [number, string] = [1, 'b'];
+// // problematic 
+// user.push(24);
+
+// console.log(user)
+
+// enums
+// to represent three characterstic of one object using
+// const small = 1;
+// const medium = 2;
+
+//PascalCase
+
+// by using const we can create more optimized code on the js file
+// without it iti s pretty lengthy 
+// const enum Size {Small = 1, Medium, Large};
+
+// let mySize: Size = Size.Medium;
+
+// console.log(mySize)
+
+
+// function claculator(val: number): void {
+//     console.log(val * val)
+// }
+
+
+// function claculatodr(val: number): number {
+//     if (val > 240)
+//         return val * 24;
+//     return 0
+// }
+
+// function claculator(val: number, tax: 25): void {
+//     if (tax < 24)
+//         console.log(val * val)
+// }
+
+
+// initialiing the object 
+// let employee: {
+//     readonly id: number,
+//     name: string,
+//     retire: (data: Date) => void
+// } = { id: 1,
+//       name: 'be',
+//       retire: (data: Date) => {
+//     console.log("no")
+// }};
+

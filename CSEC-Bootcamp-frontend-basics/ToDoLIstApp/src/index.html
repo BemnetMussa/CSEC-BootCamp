@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=
+"./input.css"
+          rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>TODO LIST</h1>
+        
+        <div class="sub_container">
+       
+            <input type="text" class="search_note" placeholder="Search notes....">
+            <i class="fa-solid fa-magnifying-glass" ></i>
+
+            <select name="options_container" class="">
+                <option value="All">All</option>
+                <option value="Complete">Complete</option>
+                <option value="Incomplete">Incomplete</option>
+            </select>
+
+            <button id="themes" class="">
+                Light/Dark
+            </button>
+
+        </div>
+
+        <div class="notes_container">
+            <div class="notes">
+                <div>
+                   <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                   <label for="vehicle1"> Note 1 </label>
+                </div>
+
+                <div class="note_buttons">
+                    <button class="delete_btn">delete</button>
+                    <button class="edit_btn">edit</button>
+                </div>
+            </div>
+            <hr>
+         
+        </div>
+
+        <div class="note_container">
+     
+            <button class="add_btn">+</button>
+
+            <div class="new_note_content" id="new_note">
+
+                <div class="content">
+
+                    <h2>NEW NOTE</h2>
+                    <input type="text" placeholder="Input your note..." class="note_input">
+                    
+                    <div class="actions">
+
+                        <button class="cancel_btn">CANCEL</button>
+                        <button class="apply_btn">APPLY</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+   
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+</body>
+ <script src="./script.js"></script>
+    <script src="https://kit.fontawesome.com/46a01c0baa.js" crossorigin="anonymous"></script>
+</html>

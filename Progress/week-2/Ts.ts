@@ -159,3 +159,32 @@
 
 //
 
+
+
+// }
+
+// type Employee = Person & Contact;
+
+// const employee: Employee = {
+//     name: "Alice",
+//     age: 30,
+//     email: "alice@example.com",
+//     phone: "123-456-7890"
+// };
+
+
+
+// type Person = {
+//     name: string;
+//     age: number;
+// };
+
+// // Making all properties optional
+// type PartialPerson = {
+//     [K in keyof Person]?: Person[K];
+// };
+
+// const partialPerson: PartialPerson = {
+//     name: "Alice"
+// };
+

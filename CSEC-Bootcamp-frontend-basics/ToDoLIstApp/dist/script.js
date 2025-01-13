@@ -1,6 +1,6 @@
 "use strict";
 var _a, _b;
-const add_note = document.querySelector(".new_note_content");
+const add_note = document.querySelector(".new_container");
 const theme = document.querySelector("#themes");
 const input_value = document.querySelector(".note_input");
 const add_notes = document.querySelector(".apply_btn");
@@ -61,13 +61,6 @@ let saved_notes = localStorage.getItem('notes');
 if (saved_notes) {
     notes.push(...JSON.parse(saved_notes));
 }
-add_note === null || add_note === void 0 ? void 0 : add_note.addEventListener('click', (e) => {
-    console.log(add_note.style.display);
-    console.log(e.target);
-    if (e.target !== modal && add_note.style.display !== "none") {
-        remove_modal();
-    }
-});
 if (notes.length === 0 && new_container) {
     new_container.innerHTML = `no notes`;
 }

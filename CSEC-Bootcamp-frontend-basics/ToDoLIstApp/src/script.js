@@ -5,15 +5,39 @@ var input_value = document.querySelector(".note_input");
 var add_notes = document.querySelector(".apply_btn");
 var new_container = document.querySelector(".notes_container");
 var modal = document.querySelector(".content");
-var notes = [{ text: "task1", done: true }, { text: "task1", done: true }, { text: "task1", done: true }];
+var notes = [];
 var remove_btn = (_a = document.querySelector(".cancel_btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
     remove_modal();
 });
-(_b = document.querySelector(".add_btn")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () {
-    if (add_note) {
-        add_note.style.display = "block";
+var curr = theme === null || theme === void 0 ? void 0 : theme.getAttribute('name');
+var saved_notes = localStorage.getItem('notes');
+function empthyCover() {
+    if (saved_notes && saved_notes !== '[]') {
+        notes.length = 0; // Clear existing notes
+        notes.push.apply(// Clear existing notes
+        notes, JSON.parse(saved_notes));
+        displayNotes();
     }
-});
+    else {
+        if (new_container) {
+            new_container.innerHTML = '';
+            var newNote = document.createElement("div");
+            var img = document.createElement("img");
+            img.src = "../images/image.svg";
+            var div = document.createElement("h2");
+            div.innerHTML = "Empty....";
+            if (curr === "light") {
+                div.style.color = "black";
+            }
+            else {
+                div.style.color = "white";
+            }
+            newNote.appendChild(img);
+            newNote.appendChild(div);
+            new_container.appendChild(newNote);
+        }
+    }
+}
 function remove_modal() {
     if (add_note) {
         add_note.style.display = "none";
@@ -22,6 +46,11 @@ function remove_modal() {
         }
     }
 }
+(_b = document.querySelector(".add_btn")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () {
+    if (add_note) {
+        add_note.style.display = "block";
+    }
+});
 add_notes === null || add_notes === void 0 ? void 0 : add_notes.addEventListener("click", function () {
     if (input_value && input_value.value.trim() !== '') {
         notes.push({
@@ -35,8 +64,8 @@ add_notes === null || add_notes === void 0 ? void 0 : add_notes.addEventListener
 });
 theme === null || theme === void 0 ? void 0 : theme.addEventListener("click", function () {
     if (theme) {
-        var curr = theme.getAttribute('name');
-        if (curr === "light") {
+        var curr_1 = theme.getAttribute('name');
+        if (curr_1 === "light") {
             document.documentElement.style.setProperty('--primary-color', '#252525');
             document.documentElement.style.setProperty('--text-color', 'white');
             theme.setAttribute('name', "dark");
@@ -50,42 +79,37 @@ theme === null || theme === void 0 ? void 0 : theme.addEventListener("click", fu
         }
     }
 });
-var saved_notes = localStorage.getItem('notes');
-if (saved_notes) {
-    notes.push.apply(notes, JSON.parse(saved_notes));
-}
-add_note === null || add_note === void 0 ? void 0 : add_note.addEventListener('click', function (e) {
-    console.log(add_note.style.display);
-    console.log(e.target);
-    if (e.target !== modal && add_note.style.display !== "none") {
-        remove_modal();
-    }
-});
-if (notes.length === 0 && new_container) {
-    new_container.innerHTML = "no notes";
-}
 function displayNotes() {
-    if (new_container) {
+    if (new_container && notes.length > 0) {
         new_container.innerHTML = '';
         notes.forEach(function (note, index) {
             var newNote = document.createElement("div");
-            newNote.innerHTML = "\n                    <div class=\"notes\">\n                    <div >\n                        <input type=\"checkbox\" name=\"".concat(index, "\" ").concat(note.done ? 'checked' : '', ">\n                        <label for=\"").concat(index, "\"> ").concat(note.text, " </label>\n                    </div>\n\n                    <div class=\"note_buttons\">\n                        \n                        <button class=\"delete_btn\">\n                        <svg width=\"20\" height=\"20\" viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                            <path d=\"M3.87414 7.61505C3.80712 6.74386 4.49595 6 5.36971 6H12.63C13.5039 6 14.1927 6.74385 14.1257 7.61505L13.6064 14.365C13.5463 15.1465 12.8946 15.75 12.1108 15.75H5.88894C5.10514 15.75 4.45348 15.1465 4.39336 14.365L3.87414 7.61505Z\" stroke=\"#CDCDCD\"/>\n                            <path d=\"M14.625 3.75H3.375\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                            <path d=\"M7.5 2.25C7.5 1.83579 7.83577 1.5 8.25 1.5H9.75C10.1642 1.5 10.5 1.83579 10.5 2.25V3.75H7.5V2.25Z\" stroke=\"#CDCDCD\"/>\n                            <path d=\"M10.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                            <path d=\"M7.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                        </svg>\n                        </button>\n\n                        <button class=\"edit_btn\">\n                            <svg width=\"17\" height=\"16\" viewBox=\"0 0 15 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                            <path d=\"M7.67272 3.49106L1 10.1637V13.5H4.33636L11.0091 6.82736M7.67272 3.49106L10.0654 1.09837L10.0669 1.09695C10.3962 0.767585 10.5612 0.602613 10.7514 0.540824C10.9189 0.486392 11.0993 0.486392 11.2669 0.540824C11.4569 0.602571 11.6217 0.767352 11.9506 1.09625L13.4018 2.54738C13.7321 2.87769 13.8973 3.04292 13.9592 3.23337C14.0136 3.40088 14.0136 3.58133 13.9592 3.74885C13.8974 3.93916 13.7324 4.10414 13.4025 4.43398L13.4018 4.43468L11.0091 6.82736M7.67272 3.49106L11.0091 6.82736\" stroke=\"#CDCDCD\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </svg>\n\n                        </button>\n                    </div>\n                </div>\n                <hr>");
-            var checkbox = newNote.querySelector('input[type="checkbox"]');
-            checkbox === null || checkbox === void 0 ? void 0 : checkbox.addEventListener('change', function (e) {
-                notes[index].done = e.target.checked;
+            newNote.className = "newNote";
+            newNote.setAttribute('data-index', "".concat(index));
+            newNote.innerHTML = "\n                <div class=\"notes\">\n                    <div>\n                        <input type=\"checkbox\" class=\"note-checkbox\" ".concat(note.done ? 'checked' : '', ">\n                        <label> ").concat(note.text, " </label>\n                    </div>\n                    <div class=\"note_buttons\">\n                        <button class=\"delete_btn\">\n                            <svg width=\"20\" height=\"20\" viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M3.87414 7.61505C3.80712 6.74386 4.49595 6 5.36971 6H12.63C13.5039 6 14.1927 6.74385 14.1257 7.61505L13.6064 14.365C13.5463 15.1465 12.8946 15.75 12.1108 15.75H5.88894C5.10514 15.75 4.45348 15.1465 4.39336 14.365L3.87414 7.61505Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M14.625 3.75H3.375\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 2.25C7.5 1.83579 7.83577 1.5 8.25 1.5H9.75C10.1642 1.5 10.5 1.83579 10.5 2.25V3.75H7.5V2.25Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M10.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                            </svg>\n                        </button>\n                        <button class=\"edit_btn\">\n                            <svg width=\"17\" height=\"16\" viewBox=\"0 0 15 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M7.67272 3.49106L1 10.1637V13.5H4.33636L11.0091 6.82736M7.67272 3.49106L10.0654 1.09837L10.0669 1.09695C10.3962 0.767585 10.5612 0.602613 10.7514 0.540824C10.9189 0.486392 11.0993 0.486392 11.2669 0.540824C11.4569 0.602571 11.6217 0.767352 11.9506 1.09625L13.4018 2.54738C13.7321 2.87769 13.8973 3.04292 13.9592 3.23337C14.0136 3.40088 14.0136 3.58133 13.9592 3.74885C13.8974 3.93916 13.7324 4.10414 13.4025 4.43398L13.4018 4.43468L11.0091 6.82736M7.67272 3.49106L11.0091 6.82736\" stroke=\"#CDCDCD\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </svg>\n                        </button>\n                    </div>\n                </div>\n                <hr>");
+            // Add event listeners to the new note
+            var checkbox = newNote.querySelector('.note-checkbox');
+            checkbox === null || checkbox === void 0 ? void 0 : checkbox.addEventListener('change', function () {
+                notes[index].done = checkbox.checked;
                 saveNotes();
             });
             var deleteBtn = newNote.querySelector('.delete_btn');
             deleteBtn === null || deleteBtn === void 0 ? void 0 : deleteBtn.addEventListener('click', function () {
                 notes.splice(index, 1);
                 saveNotes();
-                displayNotes();
+                if (notes.length === 0) {
+                    empthyCover();
+                }
+                else {
+                    displayNotes();
+                }
             });
             var editBtn = newNote.querySelector('.edit_btn');
             editBtn === null || editBtn === void 0 ? void 0 : editBtn.addEventListener('click', function () {
-                var new_text = prompt('Edit note:', note.text);
-                if (new_text) {
-                    notes[index].text = new_text;
+                var currentText = notes[index].text;
+                var newText = prompt('Edit note:', currentText);
+                if (newText && newText.trim() !== '') {
+                    notes[index].text = newText;
                     saveNotes();
                     displayNotes();
                 }
@@ -93,9 +117,12 @@ function displayNotes() {
             new_container.appendChild(newNote);
         });
     }
-    ;
+    else if (new_container && notes.length === 0) {
+        empthyCover();
+    }
 }
 function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
-displayNotes();
+// Initial load
+empthyCover();

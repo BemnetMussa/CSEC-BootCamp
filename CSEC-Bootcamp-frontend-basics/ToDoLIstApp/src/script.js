@@ -51,6 +51,20 @@ function remove_modal() {
         add_note.style.display = "block";
     }
 });
+window.addEventListener("click", outmodal);
+function outmodal(e) {
+    var _a;
+    console.log(e.target);
+    if ((add_note === null || add_note === void 0 ? void 0 : add_note.style.display) === "block" && e.target.getAttribute("class") == "new_note_content") {
+        console.log('whatt');
+        var targetElement = e.target;
+        var outModal = (_a = targetElement.parentElement) === null || _a === void 0 ? void 0 : _a.getAttribute("class");
+        console.log(outModal);
+        if (outModal !== "content") {
+            remove_modal();
+        }
+    }
+}
 add_notes === null || add_notes === void 0 ? void 0 : add_notes.addEventListener("click", function () {
     if (input_value && input_value.value.trim() !== '') {
         notes.push({

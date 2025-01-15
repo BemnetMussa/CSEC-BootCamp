@@ -15,6 +15,7 @@ const remove_btn = document.querySelector(".cancel_btn")?.addEventListener("clic
     remove_modal();
 });
 
+
 const curr = theme?.getAttribute('name');
 
 let saved_notes = localStorage.getItem('notes');
@@ -46,6 +47,7 @@ function empthyCover() {
 }
 
 function remove_modal() {
+
     if (add_note) {
         add_note.style.display = "none";
         if (input_value) {
@@ -54,11 +56,31 @@ function remove_modal() {
     }
 }
 
+
 document.querySelector(".add_btn")?.addEventListener("click", () => {
     if (add_note) {
         add_note.style.display = "block";
     }
 });
+
+window.addEventListener("click", outmodal);
+
+function outmodal(e: MouseEvent): void {
+    console.log(e.target)
+  
+    if (add_note?.style.display === "block" && (e.target as HTMLElement).getAttribute("class") == "new_note_content") {
+        console.log('whatt')
+        const targetElement = e.target as HTMLElement;
+        const outModal = targetElement.parentElement?.getAttribute("class");
+        console.log(outModal);
+        if (outModal !== "content") {
+            remove_modal();
+        }
+    }
+}
+
+
+
 
 add_notes?.addEventListener("click", () => {
     if (input_value && input_value.value.trim() !== '') {
@@ -92,18 +114,6 @@ theme?.addEventListener("click", () => {
         }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

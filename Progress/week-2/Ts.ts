@@ -188,3 +188,13 @@
 //     name: "Alice"
 // };
 
+// // Define a function to find even numbers in an array
+// function findEvenNumbers(numbers: number[]): number[] {
+//     return numbers.filter((num) => num % 2 === 0);
+// }
+
+// // Example usage
+// const myNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const evenNumbers: number[] = findEvenNumbers(myNumbers);
+
+// console.log("Even Numbers:", evenNumbers);

@@ -11,31 +11,49 @@ var remove_btn = (_a = document.querySelector(".cancel_btn")) === null || _a ===
 });
 var curr = theme === null || theme === void 0 ? void 0 : theme.getAttribute('name');
 var saved_notes = localStorage.getItem('notes');
-function empthyCover() {
+console.log(saved_notes);
+function initializeNotes() {
     if (saved_notes && saved_notes !== '[]') {
-        notes.length = 0; // Clear existing notes
-        notes.push.apply(// Clear existing notes
-        notes, JSON.parse(saved_notes));
+        notes.length = 0;
+        notes.push.apply(notes, JSON.parse(saved_notes));
         displayNotes();
     }
     else {
-        if (new_container) {
-            new_container.innerHTML = '';
-            var newNote = document.createElement("div");
-            var img = document.createElement("img");
-            img.src = "../images/image.svg";
-            var div = document.createElement("h2");
+        empthyCover();
+    }
+}
+initializeNotes();
+function empthyCover() {
+    if (new_container) {
+        new_container.innerHTML = '';
+        var newNote = document.createElement("div");
+        var img = document.createElement("img");
+        img.src = "../images/image.svg";
+        var div = document.createElement("h2");
+        if (notes.length === 0) {
             div.innerHTML = "Empty....";
-            if (curr === "light") {
-                div.style.color = "black";
-            }
-            else {
-                div.style.color = "white";
-            }
-            newNote.appendChild(img);
-            newNote.appendChild(div);
-            new_container.appendChild(newNote);
         }
+        else {
+            switch (userOption) {
+                case 'active':
+                    div.innerHTML = "No active tasks";
+                    break;
+                case 'completed':
+                    div.innerHTML = "No completed tasks";
+                    break;
+                default:
+                    div.innerHTML = "Empty....";
+            }
+        }
+        if (curr === "light") {
+            div.style.color = "black";
+        }
+        else {
+            div.style.color = "white";
+        }
+        newNote.appendChild(img);
+        newNote.appendChild(div);
+        new_container.appendChild(newNote);
     }
 }
 function remove_modal() {
@@ -96,7 +114,21 @@ theme === null || theme === void 0 ? void 0 : theme.addEventListener("click", fu
 function displayNotes() {
     if (new_container && notes.length > 0) {
         new_container.innerHTML = '';
-        notes.forEach(function (note, index) {
+        // Filter notes based on userOption
+        var note = notes;
+        console.log(userOption);
+        if (userOption === 'Incomplete') {
+            note = notes.filter(function (note) { return !note.done; });
+        }
+        else if (userOption === 'Complete') {
+            note = notes.filter(function (note) { return note.done; });
+        }
+        if (note.length === 0) {
+            empthyCover();
+            return;
+        }
+        console.log(note);
+        note.forEach(function (note, index) {
             var newNote = document.createElement("div");
             newNote.className = "newNote";
             newNote.setAttribute('data-index', "".concat(index));
@@ -138,5 +170,12 @@ function displayNotes() {
 function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
+var userOption = 'all';
+var type = document.querySelector("select");
+type === null || type === void 0 ? void 0 : type.addEventListener('change', function (e) {
+    var target = e.target;
+    userOption = target.value;
+    displayNotes();
+});
 // Initial load
-empthyCover();
+initializeNotes();

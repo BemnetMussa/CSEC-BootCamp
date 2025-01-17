@@ -10,6 +10,15 @@ const add_notes = document.querySelector(".apply_btn") as HTMLButtonElement | nu
 const new_container = document.querySelector(".notes_container") as HTMLDivElement | null;
 const modal = document.querySelector(".content") as HTMLDivElement | null;
 const notes: Note[] = [];
+const search_input = document.querySelector(".search_note") as HTMLInputElement | null;
+
+let searchQuery = '';
+
+search_input?.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    searchQuery = target.value.toLowerCase();
+    displayNotes();
+});
 
 const remove_btn = document.querySelector(".cancel_btn")?.addEventListener("click", () => {
     remove_modal();
@@ -162,6 +171,11 @@ function displayNotes() {
             note = notes.filter(note => note.done);
         }
         
+        if (searchQuery) {
+            note = notes.filter(note => 
+                note.text.toLowerCase().includes(searchQuery)
+            );
+        }
 
         if (note.length === 0) {
             empthyCover();
@@ -180,7 +194,7 @@ function displayNotes() {
                 <div class="notes">
                     <div>
                         <input type="checkbox" class="note-checkbox" ${note.done ? 'checked' : ''}>
-                        <label> ${note.text} </label>
+                        <label style="text-decoration: ${note.done ? 'line-through' : 'none'}; color: ${note.done ? "gray" : "black"}"> ${note.text} </label>
                     </div>
                     <div class="note_buttons">
                         <button class="delete_btn">
@@ -255,7 +269,7 @@ type?.addEventListener('change', (e) => {
 });
 
 
-
+// workes
 
 
 // Initial load

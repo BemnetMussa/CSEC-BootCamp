@@ -189,5 +189,6 @@ type === null || type === void 0 ? void 0 : type.addEventListener('change', func
     userOption = target.value;
     displayNotes();
 });
+// workes
 // Initial load
 initializeNotes();

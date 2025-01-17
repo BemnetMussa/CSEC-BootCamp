@@ -17,34 +17,60 @@ const remove_btn = document.querySelector(".cancel_btn")?.addEventListener("clic
 
 
 const curr = theme?.getAttribute('name');
-
 let saved_notes = localStorage.getItem('notes');
 
-function empthyCover() {
+console.log(saved_notes)
+function initializeNotes() {
     if (saved_notes && saved_notes !== '[]') {
-        notes.length = 0; // Clear existing notes
+        notes.length = 0; 
         notes.push(...JSON.parse(saved_notes));
+    
         displayNotes();
     } else {
-        if (new_container) {
-            new_container.innerHTML = '';
-            const newNote = document.createElement("div");
-            const img = document.createElement("img");
-            img.src = "../images/image.svg";
-            const div = document.createElement("h2");
-            div.innerHTML = "Empty....";
-
-            if (curr === "light") {
-                div.style.color = "black";
-            } else {
-                div.style.color = "white";
-            }
-            newNote.appendChild(img);
-            newNote.appendChild(div);
-            new_container.appendChild(newNote);
-        }
+        empthyCover();
     }
 }
+
+
+initializeNotes();
+
+function empthyCover() {
+ 
+    if (new_container) {
+        new_container.innerHTML = '';
+        const newNote = document.createElement("div");
+        const img = document.createElement("img");
+        img.src = "../images/image.svg";
+        const div = document.createElement("h2");
+        
+
+        if (notes.length === 0) {
+            div.innerHTML = "Empty....";
+        } else {
+            switch (userOption) {
+                case 'active':
+                    div.innerHTML = "No active tasks";
+                    break;
+                case 'completed':
+                    div.innerHTML = "No completed tasks";
+                    break;
+                default:
+                    div.innerHTML = "Empty....";
+            }
+        }
+
+        if (curr === "light") {
+            div.style.color = "black";
+        } else {
+            div.style.color = "white";
+        }
+        
+        newNote.appendChild(img);
+        newNote.appendChild(div);
+        new_container.appendChild(newNote);
+    }
+}
+
 
 function remove_modal() {
 
@@ -119,10 +145,33 @@ theme?.addEventListener("click", () => {
 
 
 function displayNotes() {
+
+
+
     if (new_container && notes.length > 0) {
+
         new_container.innerHTML = '';
+
+                
+        // Filter notes based on userOption
+        let note = notes;
+        console.log(userOption)
+        if (userOption === 'Incomplete') {
+            note = notes.filter(note => !note.done);
+        } else if (userOption === 'Complete') {
+            note = notes.filter(note => note.done);
+        }
         
-        notes.forEach((note: Note, index: number) => {
+
+        if (note.length === 0) {
+            empthyCover();
+            return;
+        }
+
+        console.log(note)
+
+        
+        note.forEach((note: Note, index: number) => {
             const newNote = document.createElement("div");
             newNote.className = "newNote";
             newNote.setAttribute('data-index', `${index}`);
@@ -192,5 +241,23 @@ function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
+
+
+
+
+let userOption = 'all'; 
+const type = document.querySelector("select");
+
+type?.addEventListener('change', (e) => {
+    const target = e.target as HTMLSelectElement;
+    userOption = target.value;
+    displayNotes(); 
+});
+
+
+
+
+
 // Initial load
-empthyCover();
+initializeNotes();
+

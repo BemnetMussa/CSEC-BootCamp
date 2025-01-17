@@ -6,6 +6,13 @@ var add_notes = document.querySelector(".apply_btn");
 var new_container = document.querySelector(".notes_container");
 var modal = document.querySelector(".content");
 var notes = [];
+var search_input = document.querySelector(".search_note");
+var searchQuery = '';
+search_input === null || search_input === void 0 ? void 0 : search_input.addEventListener('input', function (e) {
+    var target = e.target;
+    searchQuery = target.value.toLowerCase();
+    displayNotes();
+});
 var remove_btn = (_a = document.querySelector(".cancel_btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
     remove_modal();
 });
@@ -123,6 +130,11 @@ function displayNotes() {
         else if (userOption === 'Complete') {
             note = notes.filter(function (note) { return note.done; });
         }
+        if (searchQuery) {
+            note = notes.filter(function (note) {
+                return note.text.toLowerCase().includes(searchQuery);
+            });
+        }
         if (note.length === 0) {
             empthyCover();
             return;
@@ -132,7 +144,7 @@ function displayNotes() {
             var newNote = document.createElement("div");
             newNote.className = "newNote";
             newNote.setAttribute('data-index', "".concat(index));
-            newNote.innerHTML = "\n                <div class=\"notes\">\n                    <div>\n                        <input type=\"checkbox\" class=\"note-checkbox\" ".concat(note.done ? 'checked' : '', ">\n                        <label> ").concat(note.text, " </label>\n                    </div>\n                    <div class=\"note_buttons\">\n                        <button class=\"delete_btn\">\n                            <svg width=\"20\" height=\"20\" viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M3.87414 7.61505C3.80712 6.74386 4.49595 6 5.36971 6H12.63C13.5039 6 14.1927 6.74385 14.1257 7.61505L13.6064 14.365C13.5463 15.1465 12.8946 15.75 12.1108 15.75H5.88894C5.10514 15.75 4.45348 15.1465 4.39336 14.365L3.87414 7.61505Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M14.625 3.75H3.375\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 2.25C7.5 1.83579 7.83577 1.5 8.25 1.5H9.75C10.1642 1.5 10.5 1.83579 10.5 2.25V3.75H7.5V2.25Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M10.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                            </svg>\n                        </button>\n                        <button class=\"edit_btn\">\n                            <svg width=\"17\" height=\"16\" viewBox=\"0 0 15 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M7.67272 3.49106L1 10.1637V13.5H4.33636L11.0091 6.82736M7.67272 3.49106L10.0654 1.09837L10.0669 1.09695C10.3962 0.767585 10.5612 0.602613 10.7514 0.540824C10.9189 0.486392 11.0993 0.486392 11.2669 0.540824C11.4569 0.602571 11.6217 0.767352 11.9506 1.09625L13.4018 2.54738C13.7321 2.87769 13.8973 3.04292 13.9592 3.23337C14.0136 3.40088 14.0136 3.58133 13.9592 3.74885C13.8974 3.93916 13.7324 4.10414 13.4025 4.43398L13.4018 4.43468L11.0091 6.82736M7.67272 3.49106L11.0091 6.82736\" stroke=\"#CDCDCD\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </svg>\n                        </button>\n                    </div>\n                </div>\n                <hr>");
+            newNote.innerHTML = "\n                <div class=\"notes\">\n                    <div>\n                        <input type=\"checkbox\" class=\"note-checkbox\" ".concat(note.done ? 'checked' : '', ">\n                        <label style=\"text-decoration: ").concat(note.done ? 'line-through' : 'none', "; color: ").concat(note.done ? "gray" : "black", "\"> ").concat(note.text, " </label>\n                    </div>\n                    <div class=\"note_buttons\">\n                        <button class=\"delete_btn\">\n                            <svg width=\"20\" height=\"20\" viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M3.87414 7.61505C3.80712 6.74386 4.49595 6 5.36971 6H12.63C13.5039 6 14.1927 6.74385 14.1257 7.61505L13.6064 14.365C13.5463 15.1465 12.8946 15.75 12.1108 15.75H5.88894C5.10514 15.75 4.45348 15.1465 4.39336 14.365L3.87414 7.61505Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M14.625 3.75H3.375\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 2.25C7.5 1.83579 7.83577 1.5 8.25 1.5H9.75C10.1642 1.5 10.5 1.83579 10.5 2.25V3.75H7.5V2.25Z\" stroke=\"#CDCDCD\"/>\n                                <path d=\"M10.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                                <path d=\"M7.5 9V12.75\" stroke=\"#CDCDCD\" stroke-linecap=\"round\"/>\n                            </svg>\n                        </button>\n                        <button class=\"edit_btn\">\n                            <svg width=\"17\" height=\"16\" viewBox=\"0 0 15 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M7.67272 3.49106L1 10.1637V13.5H4.33636L11.0091 6.82736M7.67272 3.49106L10.0654 1.09837L10.0669 1.09695C10.3962 0.767585 10.5612 0.602613 10.7514 0.540824C10.9189 0.486392 11.0993 0.486392 11.2669 0.540824C11.4569 0.602571 11.6217 0.767352 11.9506 1.09625L13.4018 2.54738C13.7321 2.87769 13.8973 3.04292 13.9592 3.23337C14.0136 3.40088 14.0136 3.58133 13.9592 3.74885C13.8974 3.93916 13.7324 4.10414 13.4025 4.43398L13.4018 4.43468L11.0091 6.82736M7.67272 3.49106L11.0091 6.82736\" stroke=\"#CDCDCD\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </svg>\n                        </button>\n                    </div>\n                </div>\n                <hr>");
             // Add event listeners to the new note
             var checkbox = newNote.querySelector('.note-checkbox');
             checkbox === null || checkbox === void 0 ? void 0 : checkbox.addEventListener('change', function () {
